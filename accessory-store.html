@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LUMIÈRE — Accessory Boutique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#FFFFFF;
+    --beige:#F1E9DC;
+    --beige-deep:#E6DAC4;
+    --ink:#2B2620;
+    --gold:#B8912F;
+    --gold-soft:#D8B96A;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:inherit;margin:0;padding:0;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth;}
+  html,body{height:100%;}
+  body{
+    background:var(--white);
+    color:var(--ink);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+    cursor:default;
+  }
+  a{color:inherit;text-decoration:none;}
+
+  header{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
+    background:rgba(255,255,255,.9);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--beige-deep);
+  }
+  .nav{
+    max-width:1100px;margin:0 auto;padding:18px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{
+    font-family:'Cormorant Garamond',serif;font-size:1.7rem;letter-spacing:.12em;font-weight:500;
+  }
+  .brand em{font-style:italic;color:var(--gold);}
+  .search-wrap{position:relative;}
+  .search-link{font-size:.9rem;letter-spacing:.05em;cursor:pointer;}
+  .dropdown{
+    position:absolute;top:calc(100% + 14px);right:0;
+    background:var(--white);border:1px solid var(--beige-deep);
+    min-width:160px;padding:6px 0;box-shadow:0 8px 24px rgba(0,0,0,.08);
+  }
+  .dropdown a{display:block;padding:10px 20px;font-size:.9rem;letter-spacing:.03em;}
+  .dropdown a:hover{background:var(--beige);}
+  .navlink.active{color:var(--gold);}
+  .section[hidden]{display:none;}
+
+  .hero{
+    background:linear-gradient(180deg,var(--beige) 0%,var(--white) 100%);
+    padding:90px 24px 70px;text-align:center;
+  }
+  .hero p.kicker{font-size:.85rem;letter-spacing:.25em;color:var(--gold);margin-bottom:18px;}
+  .hero h1{
+    font-family:'Cormorant Garamond',serif;font-weight:400;
+    font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.15;
+  }
+  .hero h1 i{font-style:italic;color:var(--gold);}
+  .hero p.sub{max-width:480px;margin:22px auto 0;line-height:1.9;color:#6b6255;font-size:.98rem;}
+
+  .section{max-width:1100px;margin:0 auto;padding:64px 24px;}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:34px;border-bottom:1px solid var(--beige-deep);padding-bottom:14px;}
+  .section-head h2{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:500;}
+  .section-head span{font-size:.85rem;color:#948a7a;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:26px;}
+  .card{
+    position:relative;overflow:hidden;background:var(--beige);
+    border:1px solid var(--beige-deep);border-radius:2px;padding-bottom:16px;
+  }
+  .thumb{
+    position:relative;height:220px;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 30% 20%, #fbf6ec, var(--beige-deep));
+    cursor:none;
+  }
+  .thumb svg{width:56%;height:56%;stroke:var(--gold);fill:none;stroke-width:1.1;opacity:.85;}
+  .card .info{padding:16px 18px 0;}
+  .card h3{font-size:1rem;font-weight:400;letter-spacing:.02em;}
+  .card .price{margin-top:6px;color:var(--gold);font-size:.9rem;letter-spacing:.05em;}
+
+  .sparkle{
+    position:absolute;pointer-events:none;width:8px;height:8px;
+    background:radial-gradient(circle,#fff8e6 0%,var(--gold-soft) 55%,transparent 75%);
+    border-radius:50%;transform:translate(-50%,-50%) scale(1);
+    animation:sparkle-fade .7s ease-out forwards;
+  }
+  @keyframes sparkle-fade{
+    0%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0deg);}
+    100%{opacity:0;transform:translate(-50%,-50%) scale(0.2) rotate(90deg);}
+  }
+
+  footer{background:var(--ink);color:var(--beige);text-align:center;padding:46px 24px;font-size:.85rem;letter-spacing:.05em;}
+  footer .brand{color:var(--beige);font-size:1.2rem;margin-bottom:10px;display:block;}
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --white:#1C1914;--beige:#26221B;--beige-deep:#3a3427;--ink:#F1E9DC;
+    }
+    body{background:var(--white);}
+  }
+  :root[data-theme="dark"]{
+    --white:#1C1914;--beige:#26221B;--beige-deep:#3a3427;--ink:#F1E9DC;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">accessory</div>
+    <div class="search-wrap">
+      <a href="#" id="searchToggle" class="navlink search-link">Search ▾</a>
+      <div class="dropdown" id="dropdown" hidden>
+        <a href="#all" class="navlink active" data-target="all">All</a>
+        <a href="#necklace" class="navlink" data-target="necklace">Necklace</a>
+        <a href="#earrings" class="navlink" data-target="earrings">Earrings</a>
+        <a href="#ring" class="navlink" data-target="ring">Ring</a>
+        <a href="#sunglasses" class="navlink" data-target="sunglasses">Sunglasses</a>
+        <a href="#bracelet" class="navlink" data-target="bracelet">Bracelet</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <p class="kicker">PARIS · MILAN · TOKYO</p>
+  <h1>Everyday jewelry,<br><i>quietly luxurious.</i></h1>
+</section>
+
+<div class="section" id="necklace">
+  <div class="section-head"><h2>Necklace</h2><span>ネックレス</span></div>
+  <div class="grid">
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><path d="M20 20 Q50 70 80 20"/><circle cx="50" cy="72" r="6"/></svg></div><div class="info"><h3>Fine Chain Necklace</h3><p class="price">¥8,900</p></div></div>
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><path d="M15 25 Q50 75 85 25"/><circle cx="50" cy="78" r="9" fill="none"/></svg></div><div class="info"><h3>Pearl Drop Necklace</h3><p class="price">¥11,400</p></div></div>
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><path d="M22 22 Q50 68 78 22"/><rect x="43" y="66" width="14" height="14" transform="rotate(45 50 73)"/></svg></div><div class="info"><h3>Coin Pendant Necklace</h3><p class="price">¥9,800</p></div></div>
+  </div>
+</div>
+
+<div class="section" id="earrings">
+  <div class="section-head"><h2>Earrings</h2><span>ピアス</span></div>
+  <div class="grid">
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><circle cx="35" cy="45" r="8"/><circle cx="65" cy="45" r="8"/><path d="M35 53v14M65 53v14"/></svg></div><div class="info"><h3>Hoop Earrings</h3><p class="price">¥6,200</p></div></div>
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><path d="M35 30 L65 30 M50 30 v40"/><circle cx="50" cy="76" r="6"/></svg></div><div class="info"><h3>Bar Drop Earrings</h3><p class="price">¥7,300</p></div></div>
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><circle cx="50" cy="40" r="14"/></svg></div><div class="info"><h3>Stud Earrings</h3><p class="price">¥5,400</p></div></div>
+  </div>
+</div>
+
+<div class="section" id="ring">
+  <div class="section-head"><h2>Ring</h2><span>リング</span></div>
+  <div class="grid">
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><circle cx="50" cy="55" r="22"/><path d="M40 33 L50 18 L60 33 Z"/></svg></div><div class="info"><h3>Signet Ring</h3><p class="price">¥9,200</p></div></div>
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><circle cx="50" cy="55" r="22"/></svg></div><div class="info"><h3>Thin Band Ring</h3><p class="price">¥4,800</p></div></div>
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><circle cx="50" cy="55" r="22"/><circle cx="50" cy="30" r="7"/></svg></div><div class="info"><h3>Solitaire Ring</h3><p class="price">¥12,600</p></div></div>
+  </div>
+</div>
+
+<div class="section" id="sunglasses">
+  <div class="section-head"><h2>Sunglasses</h2><span>サングラス</span></div>
+  <div class="grid">
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><rect x="15" y="38" width="26" height="20" rx="3"/><rect x="59" y="38" width="26" height="20" rx="3"/><path d="M41 46 h18 M15 44 L4 40 M85 44 L96 40"/></svg></div><div class="info"><h3>Oval Sunglasses</h3><p class="price">¥13,000</p></div></div>
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><path d="M14 45 Q28 30 42 45 Q28 60 14 45 Z"/><path d="M58 45 Q72 30 86 45 Q72 60 58 45 Z"/><path d="M42 45 h16"/></svg></div><div class="info"><h3>Cat Eye Sunglasses</h3><p class="price">¥14,500</p></div></div>
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><circle cx="30" cy="46" r="15"/><circle cx="70" cy="46" r="15"/><path d="M45 46 h10"/></svg></div><div class="info"><h3>Round Sunglasses</h3><p class="price">¥12,200</p></div></div>
+  </div>
+</div>
+
+<div class="section" id="bracelet">
+  <div class="section-head"><h2>Bracelet</h2><span>ブレスレット</span></div>
+  <div class="grid">
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="32" ry="14"/></svg></div><div class="info"><h3>Chain Bracelet</h3><p class="price">¥7,600</p></div></div>
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="32" ry="14"/><circle cx="50" cy="36" r="5"/></svg></div><div class="info"><h3>Charm Bracelet</h3><p class="price">¥8,400</p></div></div>
+    <div class="card"><div class="thumb sparkle-zone"><svg viewBox="0 0 100 100"><rect x="18" y="40" width="64" height="20" rx="10"/></svg></div><div class="info"><h3>Bangle Bracelet</h3><p class="price">¥9,900</p></div></div>
+  </div>
+</div>
+
+<footer>
+  <span class="brand">accessory</span>
+  © 2026 accessory
+</footer>
+
+<script>
+(function(){
+  var links = document.querySelectorAll('.navlink[data-target]');
+  var sections = document.querySelectorAll('.section');
+  var hero = document.getElementById('hero');
+  var toggle = document.getElementById('searchToggle');
+  var dropdown = document.getElementById('dropdown');
+
+  function applyFilter(target){
+    links.forEach(function(l){
+      l.classList.toggle('active', l.dataset.target === target);
+    });
+    if(target === 'all'){
+      hero.hidden = false;
+      sections.forEach(function(s){ s.hidden = false; });
+      toggle.textContent = 'Search ▾';
+    }else{
+      hero.hidden = true;
+      sections.forEach(function(s){ s.hidden = (s.id !== target); });
+      var label = links[[...links].findIndex(function(l){return l.dataset.target===target;})].textContent;
+      toggle.textContent = label + ' ▾';
+    }
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  toggle.addEventListener('click', function(e){
+    e.preventDefault();
+    dropdown.hidden = !dropdown.hidden;
+  });
+
+  links.forEach(function(l){
+    l.addEventListener('click', function(e){
+      e.preventDefault();
+      applyFilter(l.dataset.target);
+      dropdown.hidden = true;
+    });
+  });
+
+  document.addEventListener('click', function(e){
+    if(!dropdown.hidden && !dropdown.contains(e.target) && e.target !== toggle){
+      dropdown.hidden = true;
+    }
+  });
+})();
+
+(function(){
+  var zones = document.querySelectorAll('.sparkle-zone');
+  var last = 0;
+  zones.forEach(function(zone){
+    zone.addEventListener('mousemove', function(e){
+      var now = Date.now();
+      if(now - last < 40) return;
+      last = now;
+      var rect = zone.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      var s = document.createElement('div');
+      s.className = 'sparkle';
+      s.style.left = x + 'px';
+      s.style.top = y + 'px';
+      var size = 6 + Math.random()*8;
+      s.style.width = size + 'px';
+      s.style.height = size + 'px';
+      zone.appendChild(s);
+      setTimeout(function(){ s.remove(); }, 700);
+    });
+  });
+})();
+</script>
+</body>
+</html>
